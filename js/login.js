@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/login", {
+            const response = await fetch("https://tl-production.up.railway.app/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Respuesta del servidor:", data); 
 
             if (response.ok) {
-                window.location.href = "http://localhost:3000/catalogoL.html"; 
+                window.location.href = "https://tl-production.up.railway.app/catalogoL.html"; 
             } else {
                 alert("Error: " + (data.error || "Credenciales incorrectas"));
             }

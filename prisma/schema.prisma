@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model usuario {
+  id              String                @id @default(uuid())
+  nombre          String
+  apellido        String
+  tipoDocumento   usuario_tipoDocumento
+  numeroDocumento String                @unique(map: "Usuario_numeroDocumento_key")
+  email          String                 @unique(map: "Usuario_correo_key") @default("")
+  contrase_a      String                @map("contrase_a") @default("")
+  createdAt       DateTime              @default(now())
+}
+
+enum usuario_tipoDocumento {
+  CEDULA
+  TARJETA_IDENTIDAD
+  OTRO
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/Book 3D Animated Icon.png">
+    <link rel="stylesheet" href="/style/catalogo.css">
+    <title>Catalogo</title>
+</head>
+<body>
+
+    <a href="/index.html">
+        <img src="/assets/tl-sinI-fotor.png" alt="logo" class="lg-logo">
+    </a>
+    <div>
+        <ul>
+            <li><a href="perfilU.html">Mi perfil</a></li>
+        </ul>
+    </div>
+    
+    <div class="b-container">
+        <h1>Busca los libros de tu preferencia</h1>
+        <p>Busca libros por título</p>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Ingresa el título del libro">
+            <button onclick="searchBook()">Buscar</button>
+        </div>
+    </div>
+    <div id="results" class="results"></div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

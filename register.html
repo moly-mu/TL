@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/Book 3D Animated Icon.png">
+    <link rel="stylesheet" href="./style/register.css">
+    <title>Registro</title>
+</head>
+<body>
+
+    <a href="index.html">
+        <img src="./assets/tl-sinI-fotor.png" alt="logo" class="lg-logo">
+    </a>
+
+    <div class="rg-container">
+        <h2 class="rg-title">Registro</h2>
+        <form id="register-form" action="#" method="POST">
+            
+            <label for="name" class="rg-label">Nombres</label>
+            <input type="text" id="name" name="name" class="rg-input" required>
+
+            <label for="lastname" class="rg-label">Apellidos</label>
+            <input type="text" id="lastname" name="lastname" class="rg-input" required>
+
+            <label for="document-type" class="rg-label">Tipo de Documento</label>
+            <select id="document-type" name="documentType" class="rg-input" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="CEDULA">Cédula</option>
+                <option value="TARJETA_IDENTIDAD">Tarjeta de identidad</option>
+                <option value="OTRO">Otro</option>
+            </select>
+
+            <label for="document-number" class="rg-label">Número de Documento</label>
+            <input type="text" id="document-number" name="documentNumber" class="rg-input" required>
+
+            <label for="email" class="rg-label">Correo Electrónico</label>
+            <input type="email" id="email" name="email" class="rg-input" required>
+
+            <label for="password" class="rg-label">Contraseña</label>
+            <input type="password" id="password" name="password" class="rg-input" required>
+
+            <button type="submit" class="rg-btn">Registrarse</button>
+        </form>
+
+        <p class="rg-redirect">¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("register-form").addEventListener("submit", async function (event) {
+                event.preventDefault(); 
+            
+                const name = document.getElementById("name").value.trim();
+                const lastname = document.getElementById("lastname").value.trim();
+                const documentType = document.getElementById("document-type").value;
+                const documentNumber = document.getElementById("document-number").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+
+                // Validación básica
+                if (!name || !lastname || !documentType || !documentNumber || !email || !password) {
+                    alert("Todos los campos son obligatorios");
+                    return;
+                }
+
+                // Enviar datos al backend
+                try {
+                    const response = await fetch("http://localhost:3000/registro", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name, lastname, documentType, documentNumber, email, password }),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert("Registro exitoso");
+                        window.location.href = "login.html"; 
+                    } else {
+                        alert("Error al registrar: " + (data.error || "Inténtalo nuevamente"));
+                    }
+                } catch (error) {
+                    console.error("Error en el registro:", error);
+                    alert("Hubo un problema con el servidor. Inténtalo más tarde.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
